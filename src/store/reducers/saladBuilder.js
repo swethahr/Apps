@@ -2,8 +2,7 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     ingredients: null,
-    selectedIngredients: null,
-    totalPrice: 0    
+    selectedIngredients: null
 };
 
 const addIngredient = ( state, action ) => {
