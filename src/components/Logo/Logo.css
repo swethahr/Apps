@@ -1,0 +1,12 @@
+.Logo {
+    background-color: green;
+    padding: 8px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.headerlogo{
+    height: 100%;
+    float:left;    
+}

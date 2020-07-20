@@ -1,46 +1,45 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import SelectedIngredient from '../../components/SelectedIngredients/SelectedIngredient/SelectedIngredient';
+import ContactData from '../Checkout/ContactData/ContactData';
+import './Checkout.css';
 
-import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import ContactData from './ContactData/ContactData';
 
-class Checkout extends Component {
-
-    checkoutCancelledHandler = () => {
-        this.props.history.goBack();
-    }
-
-    checkoutContinuedHandler = () => {
-        this.props.history.replace( '/checkout/contact-data' );
-    }
-
-    render () {
-        let summary = <Redirect to="/" />
-        if ( this.props.ings ) {
-            const purchasedRedirect = this.props.purchased ? <Redirect to="/"/> : null;
-            summary = (
-                <div>
-                    {purchasedRedirect}
-                    <CheckoutSummary
-                        ingredients={this.props.ings}
-                        checkoutCancelled={this.checkoutCancelledHandler}
-                        checkoutContinued={this.checkoutContinuedHandler} />
-                    <Route
-                        path={this.props.match.path + '/contact-data'}
-                        component={ContactData} />
-                </div>
-            );
+class Checkout extends Component {  
+    
+    render () {        
+        let selectedIngredients = null;  
+        let totalPrice=0;    
+        if ( this.props.selectedIngs ) {
+            selectedIngredients=this.props.selectedIngs.map((ing,index)=>{  
+                if(ing.qty>0){       
+                    totalPrice+=ing.total;      
+               return <SelectedIngredient 
+                   name={ing.name}
+                   price={ing.price}
+                   total={ing.total}
+                   key={index} 
+                   qty={ing.qty}/>                
+                }
+            })
         }
-        return summary;
+       
+        return (
+            <React.Fragment>                          
+                <label style={{color:'black'}}>Order Details: </label>
+                {selectedIngredients}
+                <label style={{color:'red'}}>Total Price : {totalPrice}</label>
+                <br/>
+                <ContactData/>
+            </React.Fragment>
+        );
     }
 }
 
 const mapStateToProps = state => {
-    return {
-        ings: state.burgerBuilder.ingredients,
-        purchased: state.order.purchased
-    }
-};
+    return {         
+         selectedIngs: state.saladBuilder.selectedIngredients,
+    };
+}
 
-export default connect( mapStateToProps )( Checkout );
+export default connect(mapStateToProps, null)(Checkout);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classes from './Layout.module.css';
+import './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 
 class Layout extends Component {
@@ -9,7 +9,7 @@ class Layout extends Component {
         return (
             <React.Fragment>
                 <Toolbar/>                
-                <main className={classes.Content}>
+                <main className="Content">
                     {this.props.children}
                 </main>
             </React.Fragment>

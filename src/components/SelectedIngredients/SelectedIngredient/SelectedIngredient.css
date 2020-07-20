@@ -1,0 +1,15 @@
+.SaladIngredient {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    width: 45%;
+}
+.Label {
+    padding: 6px;
+    font-weight: bold;
+    width: 150px;
+}
+
+
+

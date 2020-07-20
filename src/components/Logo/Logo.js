@@ -1,11 +1,12 @@
 import React from 'react';
 
 import saladLogo from '../../assets/images/salad.png';
-import classes from './Logo.module.css'
+import './Logo.css'
 
 const logo = (props) => (
-    <div className={classes.Logo}>
-        <img src={saladLogo} alt="My Salad"/>
+    <div className="Logo">
+        <img src={saladLogo} alt="My Salad" className="headerlogo"/>
+            Welcome to Nutritious and Delicious Salad Shop
     </div>
 );
 
